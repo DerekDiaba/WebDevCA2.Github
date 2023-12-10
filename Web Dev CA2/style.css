@@ -1,0 +1,41 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color:chocolate;
+}
+  
+.navbar{
+  background-color:forestgreen;
+  overflow: hidden;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.navbar a{
+display: black;
+color:rgb(204, 50, 50);
+text-decoration:none;
+padding: 80px 35px;
+}
+
+.navbar a:hover{
+background-color: bisque;
+color:red;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  flex: 1;
+  padding: 20px;
+}
+
+.image {
+  width: 50%; /* Adjust the width as needed */
+  height: auto;
+
+}

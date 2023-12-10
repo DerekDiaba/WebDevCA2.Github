@@ -1,0 +1,104 @@
+<!-- form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Sustainability Form</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to our Sustainability Website!</h1>
+    </div>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>    
+        <a href="form.html">Form</a>
+        <a href="game.html">Game</a>
+    </div>
+    <div class="main">
+        <h4>Welcome to our Sustainability Website!</h4>
+    </div>
+
+    <!-- Form -->
+    <form id="sustainabilityForm" onsubmit="return validation()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- JavaScript code -->
+    <script>
+        function validation() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var subject = document.getElementById('subject').value;
+            var phone = document.getElementById('phone').value;
+            var message = document.getElementById('message').value;
+
+            // Basic validation for the "Name" field
+            if (name.trim() === "") {
+                alert("Name can't be blank input your name");
+                return false; // Prevent form submission
+            }
+
+            // Basic validation for the "Email" field
+            var emailRegex = /^\S+@\S+\.\S+$/;
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address");
+                return false; // Prevent form submission
+            }
+
+            // Basic validation for the "Phone Number" field
+            var phoneRegex = /^\d+$/;
+            if (!phoneRegex.test(phone)) {
+                alert("Phone Number should contain 10 digits");
+                return false; // Prevent form submission
+            }
+
+            // Basic validation for the "Message" field
+            if (message.trim() === "") {
+                alert("Message can't be blank");
+                return false; // Prevent form submission
+            }
+
+            // You can add more validations for other fields as needed
+
+            // If all validations pass, you can proceed with form submission
+            return true;
+        }
+    </script>
+</body>
+</html>
+
+
+
+        
+        
+                
+
+        
+    
+
+
+
+
+
+
+
+
+   

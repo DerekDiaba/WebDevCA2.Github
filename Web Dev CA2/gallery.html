@@ -1,0 +1,48 @@
+<!-- gallery.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Sustainability Gallery</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Sustainability Inc</h1>
+    </div>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="form.html">Form</a>
+        <a href="game.html">Game</a>
+    </div>
+    <div class="main">
+        <h4>Welcome to our Sustainability Gallery full of all the most wholesome sustainability photos we could find. More information</h4>
+    </div>
+
+    <!-- Image Gallery -->
+    <div class="gallery">
+        <img src="humansustain.jpeg" alt="Human sustain Image which aims to maintain and improve human capital in society" width="325" height="325">
+        <img src="socialsustain.jpg" alt="Social sustain Image which can be defined as specifying both negative and positive impacts of systems" width="325" height="325">
+        <img src="Windmill.jpg" alt="Windmill Sustain image which wind turbines don't emit pollutions or require water for cooling making them environmentally friendly" width="325" height="325">
+        <img src="Dirtplant.jpg" alt="Dirtplant Sustain Image which includes enhancing soil organic boosting carbon sequestration" width="325" height="325">
+    </div>
+
+    <!-- Javascript code -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all the images in the gallery
+            var galleryImages = document.querySelectorAll('.gallery img');
+
+            // Add a click event listener to each image
+            galleryImages.forEach(function (image) {
+                image.addEventListener('click', function () {
+                    // When an image is clicked, display its alt text in an alert (you can modify this part)
+                    alert("Clicked on image: " + image.alt);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

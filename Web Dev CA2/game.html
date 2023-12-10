@@ -1,0 +1,281 @@
+<!--game.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polar Bear Adventure</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <div id="polar-bear"></div>
+    <div id="score">Score: 0</div>
+    <div id="high-score">High Score: 0</div>
+    <div id="game-over" class="hidden">
+      <p>Thanks for playing the game.</p>
+      <p id="exit-link" onclick="exitGame()">Exit Game</p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+   <style>
+    body{
+
+    
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  background-color: #87CEEB; /* Light Sky Blue for the sky */
+}
+
+#game-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  border: 1px solid #000;
+  overflow: hidden;
+  background-color: #fff; /* White for the ocean */
+}
+
+#polar-bear {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 70px;
+  background-image: url('polar-bear.jpeg'); /* Add your polar bear image URL here */
+  background-size: cover;
+}
+
+.fish,
+.seal {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+#score,
+#high-score {
+  position: absolute;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+}
+
+#score {
+  top: 10px;
+  right: 10px;
+}
+
+#high-score {
+  top: 40px;
+  right: 10px;
+}
+
+#game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: #FF0000; /* Red for game over text */
+  display: none;
+}
+
+#game-over p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#game-over p,
+#restart-link,
+#exit-link {
+  cursor: pointer;
+  color: blue;
+}
+
+#restart-link:hover,
+#exit-link:hover {
+  text-decoration: underline;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const polarBear = document.getElementById('polar-bear');
+  const gameContainer = document.getElementById('game-container');
+  const scoreDisplay = document.getElementById('score');
+  const highScoreDisplay = document.getElementById('high-score');
+  const gameOverText = document.getElementById('game-over');
+  const restartLink = document.getElementById('restart-link');
+  const exitLink = document.getElementById('exit-link');
+ 
+  let score = 0;
+  let highScore = 0;
+  let isGameOver = false;
+ 
+  // Display initial values
+  scoreDisplay.textContent = `Score: ${score}`;
+  highScoreDisplay.textContent = `High Score: ${highScore}`;
+ 
+  document.addEventListener('keydown', function (event) {
+    if (!isGameOver) {
+      if (event.code === 'ArrowLeft') {
+        movePolarBear(-20);
+      } else if (event.code === 'ArrowRight') {
+        movePolarBear(20);
+      }
+    }
+  });
+ 
+  function movePolarBear(distance) {
+    const currentPosition = polarBear.offsetLeft;
+    const newPosition = currentPosition + distance;
+ 
+    if (newPosition >= 0 && newPosition <= gameContainer.clientWidth - polarBear.clientWidth) {
+      polarBear.style.left = `${newPosition}px`;
+    }
+  }
+ 
+  function createObject(className, color) {
+    const object = document.createElement('div');
+    object.className = className;
+ 
+    const maxWidth = gameContainer.clientWidth - object.clientWidth;
+    const randomPosition = Math.random() * maxWidth;
+ 
+    object.style.left = `${randomPosition}px`;
+    object.style.top = '0'; // Start from the top
+ 
+    const randomSize = Math.floor(Math.random() * 30) + 20; // Random size between 20 and 50
+    object.style.width = `${randomSize}px`;
+    object.style.height = `${randomSize}px`;
+ 
+    const randomSpeed = Math.floor(Math.random() * 3) + 2; // Random speed between 2 and 4
+    moveObject(object, randomSpeed, color);
+ 
+    gameContainer.appendChild(object);
+  }
+ 
+  function moveObject(object, speed, color) {
+    let isCaught = false;
+ 
+    function animateObject() {
+      if (!isCaught && !isGameOver) {
+        object.style.top = `${parseInt(object.style.top || 0) + speed}px`;
+ 
+        if (checkCatch(polarBear, object)) {
+          isCaught = true;
+          gameContainer.removeChild(object);
+ 
+          if (object.classList.contains('fish')) {
+            score++;
+            scoreDisplay.textContent = `Score: ${score}`;
+ 
+            if (score > highScore) {
+              highScore = score;
+              highScoreDisplay.textContent = `High Score: ${highScore}`;
+            }
+          } else if (object.classList.contains('seal') && color === 'blue') {
+            endGame();
+          }
+        } else if (parseInt(object.style.top) < gameContainer.clientHeight) {
+          requestAnimationFrame(animateObject);
+        } else {
+          gameContainer.removeChild(object);
+        }
+      }
+    }
+ 
+    object.style.backgroundColor = color;
+    requestAnimationFrame(animateObject);
+  }
+ 
+  function checkCatch(polarBear, object) {
+    const polarBearRect = polarBear.getBoundingClientRect();
+    const objectRect = object.getBoundingClientRect();
+ 
+    return (
+      polarBearRect.bottom > objectRect.top &&
+      polarBearRect.top < objectRect.bottom &&
+      polarBearRect.right > objectRect.left &&
+      polarBearRect.left < objectRect.right
+    );
+  }
+ 
+  function endGame() {
+    isGameOver = true;
+    gameOverText.style.display = 'block';
+  }
+ 
+  function restartGame() {
+    isGameOver = false;
+    score = 0;
+    scoreDisplay.textContent = `Score: ${score}`;
+    gameOverText.style.display = 'none';
+ 
+    // Remove existing fish and seals
+    const objects = document.querySelectorAll('.fish, .seal');
+    objects.forEach(object => gameContainer.removeChild(object));
+ 
+    // Start the game again
+    startGame();
+  }
+ 
+  function exitGame() {
+    gameOverText.innerHTML = '<p>Thanks for playing the game. Come back soon!</p>';
+    restartLink.style.display = 'none';
+    exitLink.style.display = 'none'; // Hide the exit link
+  }
+ 
+  function startGame() {
+    setInterval(() => {
+      if (!isGameOver) {
+        const randomColor = getRandomColor();
+        const objectType = Math.random() < 0.5 ? 'fish' : 'seal';
+        createObject(objectType, randomColor);
+      }
+    }, 2000); // Create a new object (fish or seal) every 2 seconds
+  }
+ 
+  function getRandomColor() {
+    const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  }
+ 
+  // Start the game initially
+  startGame();
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,119 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Sustainability Website</title>
+</head>
+<body onload="welcomeMessage()">
+    <div class="header">
+        <h1>Welcome to Sustainability Inc</h1>
+    </div>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>    
+        <a href="form.html">Form</a>
+        <a href="game.html">Game</a>
+    </div>
+    <div class="main">
+        <h4>Welcome to our Sustainability Website</h4>
+    </div>
+
+    <!-- Main Content -->
+    <section>
+        <h2>This page is the home page</h2>
+        <h3>Explore the various aspects of sustainability on this website.</h3>
+        <h5>On this page, you will learn about the 4 pillars of sustainability!
+            The 4 pillars of sustainability are human, social, economic, and environmental</h5>
+        <div class="container">
+            <div class="text">
+                <!-- Your content -->
+                <p>
+                  Human sustainability
+                  <br><br>
+                  Human sustainability refers to the sustainment and improvement of human resources/assets or culture within society. 
+                  Typically, this could be achieved through enablers such as investment in services or capacity covering areas such as:
+                  <br><br>
+                  Health, Education, Welfare, etc.
+                  <br><br>
+                  The Human sustainability pillar targets investment in skills that function to sustain or improve the well-being of society.
+                  <br><br>
+                  Social sustainability has a broader scope with a far-reaching view of the world we live in, accommodating communities, cultures, and concepts such as globalization. It also introduces the principle that society and the environment are mutually dependent.
+                  The goal of social sustainability is two-fold:
+                  <br><br>
+                  Recognize that we have an impact on others and on the world by what we do.
+                  To protect future generations.
+                  <br><br>
+                  You can see social sustainability encouraged through laws and regulations. For example, within business equality and rights policies, which aim to drive both social and economic equality.
+                  <br><br>
+                  Where Social and Human sustainability focus on human issues, economic sustainability focuses on monetary capital.
+                  Economic sustainability is often described at a country or regional level.
+                  <br><br>
+                  It can be defined as the economic ability of a given country or region to support a specified level of economic production indefinitely.
+                  <br><br>
+                  Environmental sustainability aims to enhance the welfare of the population through the strength and stability of our natural capital.
+                  Examples of natural capital include resources such as:
+                  <br><br>
+                  Fossil fuels, Land, Air, Water, Minerals, Solar Energy 
+                  <br><br>
+                  Environmental initiatives are commonplace and are usually one of the key terms people think of when thinking about sustainability.
+                  <br><br>
+                  All information was gained from <a href="https://sanzubusinesstraining.com/what-are-the-four-types-of-sustainability/" target="_blank">this source</a>. Go there for more information. Thanks for reading.
+              </p>
+          </div>
+          <img class="image" src="pillars.jpg" alt="Image" width="100" height="100">
+        </div>
+    </section>
+
+    <script>
+        
+        
+    // Function to display a welcome message with a prompt for the user's name
+    function welcomeMessage() {
+        var userName;
+
+        // Keep prompting until a valid name is entered
+        do {
+            userName = prompt("Hello! Welcome! Please enter your name:");
+
+            // Display a message if the user didn't enter a name
+            if (userName === null || userName.trim() === "") {
+                alert("Please enter a valid name!");
+            }
+        } while (userName === null || userName.trim() === "");
+
+        alert("Hello, " + userName + "! Welcome to our website!");
+    }
+</script>
+</body>
+</html>
+
+
+
+        
+    
+
+      
+
+
+
+
+
+
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+
+ 
